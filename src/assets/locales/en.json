@@ -1,0 +1,6 @@
+{
+    "login": {
+        "WelcomeMessage": "Welcome to ChefBFF",
+        "WelcomeSubText": "Enter yout username and password and we will load your recipes."
+    }
+}
