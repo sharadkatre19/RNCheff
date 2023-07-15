@@ -1,12 +1,14 @@
 import React from 'react';
 import { View, ViewProps, StyleProp, ViewStyle, SafeAreaView, Platform, ScrollView } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 interface BlockProps extends ViewProps {
     id?: string;
     flex?: boolean;
     row?: boolean;
     center?: boolean;
+    keyboard?: boolean;
     align?:
     | 'flex-start'
     | 'flex-end'
@@ -32,8 +34,8 @@ interface BlockProps extends ViewProps {
 
 const Block: React.FC<BlockProps> = ({ style, children, ...rest }) => {
     const { theme } = useTheme();
-    const { id = "Block", scroll, flex, safe, card, shadow, row, center, align, justify } = rest;
-    const _style: any = [
+    const { id = "Block", scroll, flex, safe, card, shadow, row, center, align, justify, keyboard } = rest;
+    const blockStyles: any = [
         flex && { flex: 1 },
         card && {
 
@@ -55,34 +57,35 @@ const Block: React.FC<BlockProps> = ({ style, children, ...rest }) => {
             }),
         }
         , style];
-    // if (keyboard) {
-    //     return (
-    //         <KeyboardAwareScrollView {...blockID} {...rest} style={blockStyles}>
-    //             {children}
-    //         </KeyboardAwareScrollView>
-    //     );
-    // }
 
     const blockID =
         Platform.OS === 'android' ? { accessibilityLabel: id } : { testID: id };
 
+    if (keyboard) {
+        return (
+            <KeyboardAwareScrollView {...blockID} {...rest} style={blockStyles}>
+                {children}
+            </KeyboardAwareScrollView>
+        );
+    }
+
     if (scroll) {
         return (
-            <ScrollView {...blockID} {...rest} style={_style}>
+            <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} {...blockID} {...rest} style={blockStyles}>
                 {children}
             </ScrollView>
         );
     }
     if (safe) {
         return (
-            <SafeAreaView style={_style} {...rest}>
+            <SafeAreaView style={blockStyles} {...rest}>
                 {children}
             </SafeAreaView>
         )
     }
 
     return (
-        <View style={_style} {...rest}>
+        <View style={blockStyles} {...rest}>
             {children}
         </View>
     );

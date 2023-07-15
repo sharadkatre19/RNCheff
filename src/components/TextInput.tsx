@@ -29,8 +29,8 @@ const TextInput: React.FC<TInputProps> = ({ name, icon, label, ...props }) => {
                     onChangeText={field.onChange(name)}
                     onBlur={field.onBlur(name)}
                     value={field.value}
-                    {...props}
                     secureTextEntry={name === 'password' && !isPasswordVisible}
+                    {...props}
                 />
                 {
                     name === 'password' ? (
@@ -51,7 +51,7 @@ const TextInput: React.FC<TInputProps> = ({ name, icon, label, ...props }) => {
                     ) : null
                 }
             </View>
-            {meta.touched && meta.error && <Text style={{ color: 'red' }}>{meta.error}</Text>}
+            {meta.touched && meta.error && <Text style={{ color: theme.colors.danger }}>{meta.error}</Text>}
         </View>
     );
 };

@@ -11,6 +11,8 @@ import { useTheme } from '../contexts/ThemeContext';
 
 type AuthStackParamList = {
     Login: undefined;
+    ForgotPassword: undefined;
+    Signup: undefined;
 };
 
 export type AppStackParamList = {
@@ -29,8 +31,8 @@ const NavigationContainer = () => {
     }
     return (
         <NContainer theme={theme}>
-            {/* {<AuthStack />} */}
-            {authData ? <AppStack /> : <AuthStack />}
+            {<AuthStack />}
+            {/* {authData ? <AppStack /> : <AuthStack />} */}
         </NContainer>
     );
 }

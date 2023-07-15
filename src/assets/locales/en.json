@@ -1,6 +1,14 @@
 {
     "login": {
-        "WelcomeMessage": "Welcome to ChefBFF",
+        "WelcomeMessage": "Welcome back to ChefBFF",
         "WelcomeSubText": "Enter yout username and password and we will load your recipes."
+    },
+    "forgotPassword": {
+        "WelcomeMessage": "Forget password?",
+        "WelcomeSubText": "Enter yout email address to reset password"
+    },
+    "signup": {
+        "WelcomeMessage": "Welcome to ChefBFF",
+        "WelcomeSubText": "Enter your details and let's create recipies"
     }
 }

@@ -168,7 +168,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({ children, ...props }) =>
                 disabled={disabled}
                 onPress={handlePress}
                 {...props}
-                style={[buttonStyles, {alignItems: 'center', justifyContent: 'center', borderRadius: 6, padding: 16}]}>
+                style={[{alignItems: 'center', justifyContent: 'center', borderRadius: 6, padding: 16},buttonStyles]}>
                 <View>
                     <Text style={{ color: textColor ? textColor : '#FFF' }}>{title}</Text>
                 </View>

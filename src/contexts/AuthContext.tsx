@@ -33,7 +33,7 @@ const AuthProvider: React.FC = ({ children }: any) => {
         } finally {
             setTimeout(() => {
                 setLoading(false);
-            }, 2000);
+            }, 5000);
         }
     }
 

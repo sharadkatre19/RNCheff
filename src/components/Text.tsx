@@ -103,7 +103,6 @@ const Typography = (props: TextProps) => {
     : theme.colors.text;        
 
     const textStyles = StyleSheet.flatten([
-        style,
         {
             color: theme.colors.text,
             fontSize: 16,
@@ -166,6 +165,7 @@ const Typography = (props: TextProps) => {
             ...(top !== undefined && { top }),
             ...(bottom !== undefined && { bottom }),
         },
+        style,
     ]) as TextStyle;
 
     const textID =
