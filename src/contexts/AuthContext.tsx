@@ -25,15 +25,17 @@ const AuthProvider: React.FC = ({ children }: any) => {
     async function loadStorageData(): Promise<void> {
         try {
                 const authDataSerialized = await AsyncStorage.getItem('@AuthData');
+                console.log("🚀 ~ file: AuthContext.tsx:28 ~ loadStorageData ~ authDataSerialized:", authDataSerialized)
                 if (authDataSerialized) {
                     const _authData: AuthData = JSON.parse(authDataSerialized);
+                    console.log("🚀 ~ file: AuthContext.tsx:30 ~ loadStorageData ~ _authData:", _authData)
                     setAuthData(_authData);
                 }
         } catch (error) {
         } finally {
             setTimeout(() => {
                 setLoading(false);
-            }, 5000);
+            }, 3000);
         }
     }
 
@@ -44,6 +46,7 @@ const AuthProvider: React.FC = ({ children }: any) => {
         );
 
         setAuthData(_authData);
+        console.log("🚀 ~ file: AuthContext.tsx:49 ~ signIn ~ _authData:", _authData)
 
         AsyncStorage.setItem('@AuthData', JSON.stringify(_authData));
     };

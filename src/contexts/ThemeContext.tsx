@@ -30,6 +30,7 @@ const ThemeProvider: React.FC = ({ children }: any) => {
             subtext: 'rgb(102, 102, 102)',
             separator: 'rgb(194, 194, 195)',
             highlight: 'rgb(199, 198, 203)',
+            gray: 'rgb(150, 150, 150)',
         },
         spacing: {
             s: 8,
@@ -54,6 +55,7 @@ const ThemeProvider: React.FC = ({ children }: any) => {
             subtext: 'rgb(102, 102, 102)',
             separator: 'rgb(194, 194, 195)',
             highlight: 'rgb(199, 198, 203)',
+            gray: 'rgb(150, 150, 150)',
         },
         spacing: {
             s: 8,

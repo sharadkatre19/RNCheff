@@ -21,6 +21,7 @@ export type AppStackParamList = {
 };
 
 export type AuthProps = NativeStackScreenProps<AuthStackParamList, 'Login'>;
+export type SettingsProps = NativeStackScreenProps<AppStackParamList, 'Settings'>;
 
 const NavigationContainer = () => {
     const { authData, loading } = useAuth();
@@ -31,8 +32,8 @@ const NavigationContainer = () => {
     }
     return (
         <NContainer theme={theme}>
-            {<AuthStack />}
-            {/* {authData ? <AppStack /> : <AuthStack />} */}
+            {/* {<AuthStack />} */}
+            {authData ? <AppStack /> : <AuthStack />}
         </NContainer>
     );
 }

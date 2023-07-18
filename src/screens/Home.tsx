@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { FlatList, Image, SafeAreaView, View } from 'react-native';
 import { Block, Button, Text } from '../components';
 import { useTheme } from '../contexts/ThemeContext';
@@ -576,18 +576,29 @@ const Home = () => {
     const { theme } = useTheme();
     const navigation = useNavigation<HomeNavProps['navigation']>();
 
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerShown: true,
+            headerTintColor: theme.colors.primary,
+            headerTitleStyle: {
+              color: theme.colors.text,
+              fontFamily: 'Lato-Black',
+            },
+            headerLeft: () => (
+                <Button drawer style={{paddingLeft: 8}}/>
+            ),
+            headerStyle: {
+                backgroundColor: theme.colors.contentBackground
+            }
+        });
+    });
+
     const onClickRecipe = (item: any) => {
-    navigation.navigate('RecipeDetails', {recipe: item.item});
+        // navigation.navigate('RecipeDetails', {recipe: item.item});
     }
     return (
         <Block flex style={{ backgroundColor: theme.colors.background }}>
         <Block safe style={{ backgroundColor: theme.colors.contentBackground }}/>
-            <Block row align='center' justify='space-between' style={{ paddingHorizontal: 16, borderBottomWidth: 0.5, height: 48, borderBottomColor: theme.colors.border, backgroundColor: theme.colors.contentBackground }}>
-                <Button drawer />
-                <Block flex style={{ paddingLeft: 16 }}>
-                    <Text>My recipe's</Text>
-                </Block>
-            </Block>
             <Block flex style={{ padding: 8 }}>
                 <FlatList
                     numColumns={2}

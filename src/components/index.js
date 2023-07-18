@@ -4,6 +4,8 @@ import TextInput from './TextInput';
 import DrawerContent from './DrawerContent';
 import Switch from './Switch';
 import Block from './Block';
+import AppHeader from './AppHeader';
+import BottomSheet from './BottomSheet';
 
 export {
     Text,
@@ -11,5 +13,7 @@ export {
     TextInput,
     DrawerContent,
     Switch,
-    Block
+    Block,
+    AppHeader,
+    BottomSheet,
 }

@@ -18,6 +18,7 @@ declare module '@react-navigation/native' {
       border: string;
       highlight: string;
       notification: string;
+      gray: string;
     };
     spacing: {
       s: number;

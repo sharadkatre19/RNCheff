@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { TouchableOpacity, StyleSheet } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
-import Text from './Text';
+import Block from './Block';
 
 interface SwitchProps {
   value: boolean;
@@ -10,31 +9,45 @@ interface SwitchProps {
 }
 
 const Switch: React.FC<SwitchProps> = ({ value, onValueChange }) => {
-  const {theme} = useTheme();
+  const { theme } = useTheme();
+  const [isOn, setIsOn] = useState(false);
+
   const handleToggleSwitch = () => {
+    setIsOn(isOn => !isOn);
     onValueChange(!value);
   };
 
   const iconName = value ? 'toggle-switch' : 'toggle-switch-off';
 
   return (
-    <TouchableOpacity style={styles.container} onPress={handleToggleSwitch}>
-        <Text>{value}</Text>
-        <MaterialCommunityIcons name={iconName} size={40} color={value ? theme.colors.primary : 'gray'} />
+    <TouchableOpacity style={[styles.outer, isOn ?
+      { justifyContent: 'flex-end', backgroundColor: 'green' }
+      : { justifyContent: 'flex-start', backgroundColor: 'gray' }
+    ]} activeOpacity={1} onPress={handleToggleSwitch}>
+      <Block style={styles.inner} />
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  inner: {
+    height: 20,
+    width: 20,
+    backgroundColor: '#FFF',
+    borderRadius: 10,
+    elevation: 8,
+    shadowOffset: { height: 0, width: 0 },
+    shadowOpacity: 0.12,
+    shadowRadius: 2
   },
-  switch: {
-    width: 50,
-    height: 40,
-    borderRadius: 15,
-    backgroundColor: 'lightgray',
+  outer: {
+    width: 48,
+    height: 24,
+    backgroundColor: 'gray',
+    borderRadius: 20,
     alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    paddingHorizontal: 2
   },
 });
 

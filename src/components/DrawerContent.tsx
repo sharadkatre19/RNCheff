@@ -1,6 +1,6 @@
 import { DrawerContentComponentProps, DrawerContentScrollView, DrawerItemList, DrawerItem } from "@react-navigation/drawer";
 import { useState } from "react";
-import { Animated, StyleSheet, Switch, Text, View } from "react-native";
+import { Animated, Pressable, StyleSheet, Switch, Text, View } from "react-native";
 import Block from "./Block";
 import Button from "./Button";
 import { useNavigation } from "@react-navigation/native";
@@ -14,7 +14,7 @@ type ProfileScreenNavigationProp = AppDrawerNavProps['navigation'];
 interface DrawerContentProps extends DrawerContentComponentProps {
 }
 
-const DrawerContent: React.FC<DrawerContentProps> = ({ ...props }) => {
+const DrawerContent1: React.FC<DrawerContentProps> = ({ ...props }) => {
 
     const navigation = useNavigation<ProfileScreenNavigationProp>();
     const { theme } = useTheme();
@@ -22,7 +22,7 @@ const DrawerContent: React.FC<DrawerContentProps> = ({ ...props }) => {
         <DrawerContentScrollView style={{ backgroundColor: theme.colors.background }} {...props}>
             <Block flex align="flex-start">
                 <Block style={{ backgroundColor: theme.colors.background }}>
-                    <Button textColor={theme.colors.text} style={{ padding: 16 }} title="My recipe's"
+                    <Button textColor={theme.colors.text} style={{ padding: 16 }} title="My Recipes"
                         onPress={() => {
                             navigation.navigate('BottomTabs');
                         }} />
@@ -35,5 +35,37 @@ const DrawerContent: React.FC<DrawerContentProps> = ({ ...props }) => {
         </DrawerContentScrollView>
     );
 }
+
+export { DrawerContent1 };
+
+
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+const DrawerContent: React.FC<DrawerContentProps> = ({ ...props }) => {
+    const { theme } = useTheme();
+    return (
+        <View style={{ flex: 1 }}>
+            <DrawerContentScrollView
+                {...props}
+                style={{ backgroundColor: theme.colors.contentBackground, }}>
+                <Block align="center" justify="center" >
+                    <Ionicons name="person-circle" size={96} />
+                    <Text
+                        style={{
+                            color: theme.colors.text,
+                            fontSize: 18,
+                            fontFamily: 'Lato-Medium',
+                            marginBottom: 5,
+                        }}>
+                        John Doe
+                    </Text>
+                </Block>
+                <View style={{ flex: 1, backgroundColor: theme.colors.contentBackground, paddingTop: 10 }}>
+                    <DrawerItemList {...props} />
+                </View>
+            </DrawerContentScrollView>
+        </View>
+    );
+};
 
 export default DrawerContent;

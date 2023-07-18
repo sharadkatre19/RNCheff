@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { FlatList, Image, StyleSheet, TextInput } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Block, Button, Text } from "../components";
 import { useTheme } from "../contexts/ThemeContext";
 import { Recipe } from "../constants/Types";
+import { useNavigation } from "@react-navigation/native";
+import { SearchStackParamList } from "../navigation/AppStack";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 const recipeList = [
   {
@@ -570,18 +573,40 @@ const recipeList = [
   }
 ]
 
+export type SearchNavProps = NativeStackScreenProps<SearchStackParamList, 'Search'>;
+
 const Search = () => {
   const { theme } = useTheme();
-
+  const navigation = useNavigation<SearchNavProps['navigation']>();
 
   const [list, setList] = useState<Array<Recipe>>(recipeList);
   const [search, setSearch] = useState('');
 
   const filterList = (item: string) => {
-    console.log("🚀 ~ file: Search.tsx:580 ~ filterList ~ item:", item)
     const newList = recipeList.filter((val) => val.name.toLocaleLowerCase().indexOf(item.toLocaleLowerCase()) >= 0);
     setList(newList);
   }
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: true,
+      headerLargeTitle: false,
+      headerSearchBarOptions: {
+        tintColor: theme.colors.primary
+      },
+      headerTintColor: theme.colors.primary,
+      headerTitleStyle: {
+        color: theme.colors.text,
+        fontFamily: 'Lato-Black',
+      },
+      headerLeft: () => (
+        <Button drawer style={{ paddingLeft: 8 }} />
+      ),
+      headerStyle: {
+        backgroundColor: theme.colors.contentBackground
+      }
+    });
+  });
 
   useEffect(() => {
     if (search !== '') {
@@ -592,18 +617,18 @@ const Search = () => {
   }, [search]);
 
   const onClickRecipe = (item: any) => {
-    console.log("🚀 ~ file: Search.tsx:591 ~ onClickRecipe ~ item:", item)
+    navigation.navigate('RecipeDetails', { recipe: item.item });
   }
+
+  return (
+    <Block style={styles.icon}>
+      <Text>Search works</Text>
+    </Block>
+  )
 
   return (
     <Block flex>
       <Block safe style={{ backgroundColor: theme.colors.contentBackground }} />
-      <Block row align='center' justify='space-between' style={{ paddingHorizontal: 16, borderBottomWidth: 0.5, height: 48, borderBottomColor: theme.colors.border, backgroundColor: theme.colors.contentBackground }}>
-        <Button drawer />
-        <Block flex style={{ paddingLeft: 16 }}>
-          <Text bold>Search recipe's</Text>
-        </Block>
-      </Block>
 
       <Block style={[styles.search, { backgroundColor: theme.colors.contentBackground, borderColor: theme.colors.border }]}>
         <Block style={styles.icon}>
