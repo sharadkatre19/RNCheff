@@ -5,8 +5,8 @@ import { Block, Button, Text } from "../components";
 import { useTheme } from "../contexts/ThemeContext";
 import { Recipe } from "../constants/Types";
 import { useNavigation } from "@react-navigation/native";
-import { SearchStackParamList } from "../navigation/AppStack";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { SearchStackParamList } from "../navigation/SearchStack";
 
 const recipeList = [
   {
@@ -617,7 +617,7 @@ const Search = () => {
   }, [search]);
 
   const onClickRecipe = (item: any) => {
-    navigation.navigate('RecipeDetails', { recipe: item.item });
+    navigation.navigate('SearchRecipeDetails', { recipe: item.item });
   }
 
   return (

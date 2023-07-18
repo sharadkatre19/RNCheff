@@ -1,10 +1,10 @@
 import React, { useLayoutEffect } from 'react';
-import { FlatList, Image, SafeAreaView, View } from 'react-native';
+import { FlatList, Image } from 'react-native';
 import { Block, Button, Text } from '../components';
 import { useTheme } from '../contexts/ThemeContext';
-import { HomeStackParamList } from '../navigation/AppStack';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { HomeStackParamList } from '../navigation/HomeStack';
 
 const recipeList = [
     {
@@ -569,7 +569,8 @@ const recipeList = [
         "imageURL": "http://www.chatelaine.com/wp-content/uploads/2013/05/Curried-chicken-salad.jpg",
         "originalURL": "http://www.chatelaine.com/recipe/stovetop-cooking-method/curried-chicken-salad/"
     }
-]
+];
+
 export type HomeNavProps = NativeStackScreenProps<HomeStackParamList, 'Home'>;
 
 const Home = () => {
@@ -596,10 +597,11 @@ const Home = () => {
     const onClickRecipe = (item: any) => {
         // navigation.navigate('RecipeDetails', {recipe: item.item});
     }
+    
     return (
         <Block flex style={{ backgroundColor: theme.colors.background }}>
         <Block safe style={{ backgroundColor: theme.colors.contentBackground }}/>
-            <Block flex style={{ padding: 8 }}>
+            <Block flex style={{ padding: 8, paddingBottom: 80 }}>
                 <FlatList
                     numColumns={2}
                     data={recipeList}
@@ -609,8 +611,8 @@ const Home = () => {
                             <Block shadow flex style={{ margin: 8, backgroundColor: theme.colors.contentBackground, borderRadius: 6 }}>
                                 <Button onPress={() => onClickRecipe(item)}>
                                     <Block style={{ overflow: 'hidden' }}>
-                                        <Image source={{ uri: item.item.imageURL }} borderTopLeftRadius={6} borderTopRightRadius={6} resizeMode='cover' style={{ height: 160, width: `100%`, overflow: 'hidden' }} />
-                                        <Text numberOfLines={1} style={{ padding: 16 }}>{item.item.name}</Text>
+                                        <Image source={{ uri: item.item.imageURL }} style={{ resizeMode: 'cover', height: 160, width: `100%`, borderTopLeftRadius:6, borderTopRightRadius: 6 }} />
+                                        <Text numberOfLines={2} style={{ padding: 16 }}>{item.item.name}</Text>
                                     </Block>
                                 </Button>
                             </Block>

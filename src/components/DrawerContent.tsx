@@ -1,6 +1,6 @@
 import { DrawerContentComponentProps, DrawerContentScrollView, DrawerItemList, DrawerItem } from "@react-navigation/drawer";
 import { useState } from "react";
-import { Animated, Pressable, StyleSheet, Switch, Text, View } from "react-native";
+import { Animated, Linking, Pressable, StyleSheet, Switch, Text, View } from "react-native";
 import Block from "./Block";
 import Button from "./Button";
 import { useNavigation } from "@react-navigation/native";
@@ -54,7 +54,7 @@ const DrawerContent: React.FC<DrawerContentProps> = ({ ...props }) => {
                         style={{
                             color: theme.colors.text,
                             fontSize: 18,
-                            fontFamily: 'Lato-Medium',
+                            fontFamily: 'Lato-Bold',
                             marginBottom: 5,
                         }}>
                         John Doe
@@ -62,6 +62,16 @@ const DrawerContent: React.FC<DrawerContentProps> = ({ ...props }) => {
                 </Block>
                 <View style={{ flex: 1, backgroundColor: theme.colors.contentBackground, paddingTop: 10 }}>
                     <DrawerItemList {...props} />
+                    <DrawerItem
+                        label={'ChefBFF Web app'}
+                        labelStyle={{ fontFamily: 'Lato-Bold', fontSize: 16}}
+                        onPress={() => {
+                            Linking.openURL('https://campusrideshare.atlassian.net/jira/software/projects/CHEF/boards/2?assignee=5f5a79670b2aef0068d4ec47')
+                        }}
+                        icon={({ color }) => (
+                            <Ionicons name={'ios-browsers-outline'} size={22} color={color} />
+                        )}
+                    />
                 </View>
             </DrawerContentScrollView>
         </View>

@@ -1,10 +1,10 @@
 import React, { useLayoutEffect } from 'react';
 import { Button, Block, Text } from '../components';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { HomeStackParamList } from '../navigation/AppStack';
 import { useTheme } from '../contexts/ThemeContext';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { FlatList, Image } from 'react-native';
+import { HomeStackParamList } from '../navigation/HomeStack';
 export type HomeNavProps = NativeStackScreenProps<HomeStackParamList, 'RecipeDetails'>;
 
 const RecipeDetails: React.FC = () => {
