@@ -10,6 +10,10 @@ import Splash from './Splash';
 import Search from './Search';
 import Grocery from './Grocery';
 import Calendar from './Calendar';
+import Tags from './Tags';
+import Favouirtes from './Favouirtes';
+import Timers from './Timers';
+import ConatctUs from './ConatctUs';
 
 export {
     Login,
@@ -24,4 +28,8 @@ export {
     Search,
     Grocery,
     Calendar,
+    Tags,
+    Favouirtes,
+    Timers,
+    ConatctUs,
 };

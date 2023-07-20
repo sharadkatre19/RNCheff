@@ -6,20 +6,20 @@ import Text from './Text';
 
 export interface AppHeaderType extends PressableProps {
     style?: ViewStyle | ViewStyle[];
-    menu: string
+    menu?: boolean
     onPressMenu?: ((event: GestureResponderEvent) => void) | undefined;
-    back: string
+    back?: boolean
     onPressBack?: ((event: GestureResponderEvent) => void) | undefined;
-    title: string
-    right: string
-    rightComponent: string
+    title?: string
+    right?: string
+    rightComponent?: string
     onRightPress?: ((event: GestureResponderEvent) => void) | undefined;
-    optionalBtn: string
+    optionalBtn?: string
     optionalBtnPress?: ((event: GestureResponderEvent) => void) | undefined;
-    headerBg: string
-    iconColor: string
-    titleAlight: TextStyle['textAlign'];
-    optionalBadge: number
+    headerBg?: string
+    iconColor?: string
+    titleAlight?: TextStyle['textAlign'];
+    optionalBadge?: number
 }
 
 const IconSize = 24;
@@ -60,7 +60,7 @@ const AppHeader: React.FunctionComponent<AppHeaderType> = ({ children, ...props 
                     <Ionicons name={optionalBtn} size={IconSize} color={iconColor} />
                 </TouchableOpacity>}
                 {right !== '' && <TouchableOpacity onPress={onRightPress}>
-                    <Ionicons name={right} size={IconSize} color={iconColor} />
+                    <Ionicons name={right || ''} size={IconSize} color={iconColor} />
                 </TouchableOpacity>}
             </View>
     )

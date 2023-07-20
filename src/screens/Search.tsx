@@ -600,7 +600,7 @@ const Search = () => {
         fontFamily: 'Lato-Black',
       },
       headerLeft: () => (
-        <Button drawer style={{ paddingLeft: 8 }} />
+        <Button drawer />
       ),
       headerStyle: {
         backgroundColor: theme.colors.contentBackground

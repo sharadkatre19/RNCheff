@@ -4,6 +4,8 @@ import { useTheme } from '../contexts/ThemeContext';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
+import { DrawerToggleButton } from '@react-navigation/drawer';
+import Block from './Block';
 
 export interface ButtonProps extends PressableProps {
     style?: ViewStyle | ViewStyle[];
@@ -43,7 +45,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({ children, ...props }) =>
     const navigation = useNavigation();
     const { style,
         id = "Button",
-        title="",
+        title = "",
         back,
         drawer,
         row,
@@ -105,7 +107,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({ children, ...props }) =>
             ...(left !== undefined && { left }),
             ...(top !== undefined && { top }),
             ...(bottom !== undefined && { bottom }),
-            ...(danger && {backgroundColor: theme.colors.danger}),
+            ...(danger && { backgroundColor: theme.colors.danger }),
         },
     ]) as ViewStyle;
 
@@ -156,9 +158,9 @@ const Button: React.FunctionComponent<ButtonProps> = ({ children, ...props }) =>
 
     if (drawer) {
         return (
-            <Pressable onPress={openDrawer} {...props}>
-                <Ionicons name='ios-menu-outline' color={theme.colors.primary} size={32} />
-            </Pressable>
+            <Block style={{ marginLeft: -12 }}>
+                <DrawerToggleButton tintColor={theme.colors.primary} />
+            </Block>
         );
     }
     if (title != "") {
@@ -168,7 +170,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({ children, ...props }) =>
                 disabled={disabled}
                 onPress={handlePress}
                 {...props}
-                style={[{alignItems: 'center', justifyContent: 'center', borderRadius: 6, padding: 16},buttonStyles]}>
+                style={[{ alignItems: 'center', justifyContent: 'center', borderRadius: 6, padding: 16 }, buttonStyles]}>
                 <View>
                     <Text style={{ color: textColor ? textColor : '#FFF' }}>{title}</Text>
                 </View>

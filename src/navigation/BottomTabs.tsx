@@ -3,13 +3,14 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Calendar, Grocery, Profile } from "../screens";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useTheme } from "../contexts/ThemeContext";
-import { StyleSheet, TouchableOpacity, Text, useWindowDimensions } from "react-native";
+import { StyleSheet, TouchableOpacity, Text, useWindowDimensions, Pressable } from "react-native";
 import { View } from "react-native";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { useEffect, useRef } from "react";
 import * as Animatable from 'react-native-animatable';
 import HomeStack from "./HomeStack";
 import SearchStack from "./SearchStack";
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,6 +20,7 @@ export const hideTabBarComponents = [
 
 export default function BottomTabs() {
   const { theme } = useTheme();
+  const insets = useSafeAreaInsets();
   const {height} = useWindowDimensions();
   return (
     <Tab.Navigator screenOptions={({ route, navigation }) => ({
@@ -30,7 +32,7 @@ export default function BottomTabs() {
       headerTintColor: theme.colors.primary,
       tabBarHideOnKeyboard: true,
       tabBarStyle: {
-        height: height > 700 ? 80 : 60,
+        // height: height > 700 ? 80 : 60,
         position: 'absolute',
         bottom: 0,
         paddingHorizontal: 12,
@@ -89,7 +91,7 @@ export const TabButton = (props: any) => {
   }, [focused])
 
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={onPress}
       activeOpacity={1}
       style={[styles.container, { flex: focused ? 1 : 0.65 }]}>
@@ -107,7 +109,7 @@ export const TabButton = (props: any) => {
           </Animatable.View>
         </View>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   )
 }
 
@@ -115,13 +117,12 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 8,
-    height: 40
+    marginVertical: 8,
   },
   btn: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 8,
-    borderRadius: 16,
+    padding: 4,
+    borderRadius: 12,
   }
 })
